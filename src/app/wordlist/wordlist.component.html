@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-center container">
+    <div class="row">
+      <div *ngFor="let item of data | paginate: { itemsPerPage: 4, currentPage: p }; let i = index" class="card" style="padding-left: 0%;padding-right: 0%;">
+        <div [ngClass]="{
+          'bg-success':i%4 === 1,
+          'bg-secondary':i%4 === 0,
+          'bg-danger':i%4 === 3,
+          'bg-info':i%4 === 2
+        }" class="card-header text-white" style="padding-top:2em; font-size: xx-large;">
+            <span>{{item.word}}</span>
+        </div>
+        <div class="card-body">
+          <h6 class="card-title">{{item.definition}}</h6>
+          <hr/>
+          <p class="card-text" [innerHTML]="item.passage | highlight:item.word"></p>
+        </div>
+      </div>
+  </div>
+  </div>    
+  <div class="container">
+    <div class="row">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
